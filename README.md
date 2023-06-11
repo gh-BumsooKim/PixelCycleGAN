@@ -12,8 +12,15 @@ Unofficial Pytorch implementation of ["A Pixel image generation algorithm based 
 
 ## Implementation
 
-***Because the dataset link in paper was broken, we use custom cartoon-pixel dataset.***
-- dataset : *TAB*
+***Because the dataset link in paper was broken or unavailable due to commercial usage, we manually collected our custom unpaired cartoon-pixel dataset in internet.***
+
+
+| Dataset | # imgs | Query | Web site |
+|:---:|:---:|:---:|:---:|
+| (C) Cartoon | 2,000 | {*'cartoon'*, *'cartoon image'*} | Google, shutterstuck
+| (P) Pixel Art | 2,000 | {*'pixel art'*, *'pixel art image'*} | Google
+
+
 
 ## Results
 
