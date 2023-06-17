@@ -1,6 +1,6 @@
 # PixelCycleGAN - Unofficial Pytorch Implementation
 
->![](./assets/Results.png)
+>![](./assets/origin_paper_results.png)
 >
 > Image source: *["A Pixel image generation algorithm based on CycleGAN"](https://ieeexplore.ieee.org/document/9482118)* (figure 5, page. 4)
 
@@ -15,7 +15,7 @@ This papaer aims to pixelize the cartoon images based on CycleGAN scheme and Nes
 
 To implemente this paper, I redrew the generator architecture figure as below:
 
-![image](assets/Overview.png)
+![image](assets/generator_architecture.png)
 
 
 ## Experimental Environments
@@ -37,7 +37,7 @@ To implemente this paper, I redrew the generator architecture figure as below:
 
 ## Installation
 
-```bash
+```shell
 git clone https://github.com/gh-BumsooKim/PixelCycleGAN
 cd PixelCycleGAN
 
@@ -54,14 +54,14 @@ unzip pretrained_pixelcyclegan.zip -r pretrained
 
 ## Training
 
-```bash
+```shell
 python train.py
 ```
 
 
 ## Inference
 
-```bash
+```shell
 python test.py
 ```
 
@@ -82,7 +82,7 @@ The format of README.md file is mainly referenced by [HifiFace](https://github.c
 
 
 ## Citations
-```
+```bibtex
 @INPROCEEDINGS{9482118,
     author={Kuang, Hailan and
             Huang, Nan and
