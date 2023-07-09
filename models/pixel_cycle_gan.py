@@ -13,28 +13,28 @@ class PixelCycleGAN(BaseModel):
         BaseModel.__init__(self, opt)
     
         self.isTrain = opt.isTrain
+        self.device = 'cuda'
     
         # Define Generator
-        self.netG_cp = network.define_G(opt)
-        self.netG_pc = network.define_G(opt)
+        self.netG_cp = network.define_G(opt).to(self.device)
+        self.netG_pc = network.define_G(opt).to(self.device)
         
         # Training
         if self.isTrain:
             self.model_names = ['netG_cp', 'netG_pc', 'netD_c', 'netD_p']
             
-            
             # Define Discriminator
-            self.netD_c  = network.define_D(opt)
-            self.netD_p  = network.define_D(opt)
+            self.netD_c  = network.define_D(opt).to(self.device)
+            self.netD_p  = network.define_D(opt).to(self.device)
             
             self.fake_P_pool = ImagePool(opt.pool_size)
             self.fake_C_pool = ImagePool(opt.pool_size)
             
             # Define Criterion
-            self.criterionGAN   = network.GANloss()
+            self.criterionGAN   = network.GANLoss(opt)
             self.criterionCycle = nn.L1Loss()
             self.criterionIdt   = nn.L1Loss()
-            self.criterionTOP   = network.TOPLoss() 
+            self.criterionTOP   = network.TOPLoss(opt) 
             
             # Define Loss Params
             self.lambda_sc  = opt.lambda_sc

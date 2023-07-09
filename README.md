@@ -77,7 +77,7 @@ python test.py
 
 ## Acknowledge
 
-Since this paper mainly based on CycleGAN, we also mainly reference the [Pytorch-CycleGAN](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/tree/master) repository. <br>
+Since this paper mainly based on CycleGAN, we also heavily built this repo upon the [Pytorch-CycleGAN](https://github.com/junyanz/pytorch-CycleGAN-and-pix2pix/tree/master) repository. <br>
 The format of README.md file is mainly referenced by [HifiFace](https://github.com/mindslab-ai/hififace)
 
 
