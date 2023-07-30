@@ -41,8 +41,10 @@ To implemente this paper, I redrew the generator architecture figure as below:
 git clone https://github.com/gh-BumsooKim/PixelCycleGAN
 cd PixelCycleGAN
 
+mkdir pertrained
+
 # download training dataset
-sh download_training_datset.sh
+sh download_training_dataset.sh
 rm cookie
 unzip pixel_cartoon_dataset.zip -r dataset
 

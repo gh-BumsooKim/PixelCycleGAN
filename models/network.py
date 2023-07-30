@@ -11,10 +11,13 @@ class Sample(nn.Module):
         
         if mode=='down':
             actv_layer = nn.LeakyReLU()
+            final_channels = out_channels
         elif mode=='up':
             actv_layer = nn.ReLU()
+            final_channels = out_channels
         elif mode=='out':
             actv_layer = nn.Tanh()
+            final_channels = 3
         else:
             raise NotImplementedError()
         
@@ -25,8 +28,8 @@ class Sample(nn.Module):
             actv_layer,
             nn.Conv2d(in_channels,  out_channels, kernel_size, stride, padding),
             nn.InstanceNorm2d(out_channels),
-            nn.Conv2d(out_channels, out_channels, kernel_size, stride, padding),
-            nn.InstanceNorm2d(out_channels)
+            nn.Conv2d(out_channels, final_channels, kernel_size, stride, padding),
+            nn.InstanceNorm2d(final_channels)
             )
         
     def forward(self, x):
@@ -243,7 +246,7 @@ class GANLoss(nn.Module):
             
     def forward(self, prediction, target_is_real):
         if self.gan_mode in ['lsgan', 'vanila']:
-            target_tensor = self.get_target_tensor(prediction, target_is_real)
+            target_tensor = self.get_target_tensor(prediction, target_is_real).cuda()
             loss = self.loss(prediction, target_tensor)
         else:
             pass

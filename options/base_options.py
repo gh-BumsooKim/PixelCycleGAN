@@ -13,8 +13,8 @@ class BaseOptions():
         
         # Dataset
         parser.add_argument('--path_pixel_dataset',     type=str, default='utils/pixel art image/*.*', help='')
-        parser.add_argument('--path_cartoon_dataset',   type=str, default='utils/cartoon/*.*', help='')
-        parser.add_argument('--batch_size',             type=int, default=8, help='')
+        parser.add_argument('--path_cartoon_dataset',   type=str, default='utils/cartoon_all/*.*', help='')
+        parser.add_argument('--batch_size',             type=int, default=1, help='')
         parser.add_argument('--batch_shuffle',          type=bool,default=True, help='')
         parser.add_argument('--num_workers',            type=int, default=4, help='')
         
