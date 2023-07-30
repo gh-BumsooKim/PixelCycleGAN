@@ -51,12 +51,15 @@ class PixelCycleGAN(BaseModel):
         self.real_P = input['pixel_img'].to(self.device)
         self.real_C = input['cartoon_img'].to(self.device)
         
+        #print("real_P :", torch.min(self.real_P), torch.max(self.real_P))
+        #print("real_C :", torch.min(self.real_C), torch.max(self.real_C))
+        
     
     def forward(self):
         # C -> G_cp(C) -> G_pc(G_cp(C))
         # C -> P'      -> C''
         self.fake_p = self.netG_cp(self.real_C)
-        self.rec_p  = self.netG_pc(self.fake_p)
+        self.rec_c  = self.netG_pc(self.fake_p)
         
         # P -> G_pc(P) -> G_cp(G_pc(P))
         # P -> c'      -> p''
@@ -82,12 +85,12 @@ class PixelCycleGAN(BaseModel):
         
         ## c) 'Structural combined Loss'
         # c-1) 'Topology-aware loss'
-        self.loss_top = self.criterionTOP()
+        self.loss_top = self.criterionTOP(self.real_C, self.rec_c)
         # c-2) 'Cylcle consistency loss'
         self.loss_cycle_p = self.criterionCycle(self.rec_p, self.real_P)
         self.loss_cycle_c = self.criterionCycle(self.rec_c, self.real_C)
         self.loss_cycle   = self.loss_cycle_p + self.loss_cycle_c
-        self.loss_sc = self.cycle + self.mu*self.loss_top
+        self.loss_sc = self.loss_cycle + self.mu*self.loss_top
         
         
         # Total Loss
@@ -115,11 +118,11 @@ class PixelCycleGAN(BaseModel):
         
     def backward_D_c(self):
         fake_p = self.fake_P_pool.query(self.fake_p)
-        self.loss_D_c = self.backward_D_basic(self.netD_c, self.real_P, self.fake_P)
+        self.loss_D_c = self.backward_D_basic(self.netD_c, self.real_P, self.fake_p)
         
     def backward_D_p(self):
         fake_c = self.fake_C_pool.query(self.fake_c)
-        self.loss_D_p = self.backward_D_basic(self.netD_p, self.real_C, self.fake_C)
+        self.loss_D_p = self.backward_D_basic(self.netD_p, self.real_C, self.fake_c)
             
     def optimize_parameters(self):
         # forward

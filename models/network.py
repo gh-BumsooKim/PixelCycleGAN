@@ -258,7 +258,7 @@ class TOPLoss(nn.Module):
     def __init__(self, opt):
         super(TOPLoss, self).__init__()
         
-        self.vgg = VGG16(opt.top_n_layer)
+        self.vgg = VGG16(opt.top_n_layer).cuda()
         
         self.top_n_layer = opt.top_n_layer 
         self.loss = nn.MSELoss()
@@ -267,7 +267,7 @@ class TOPLoss(nn.Module):
         real_out = self.vgg(real_C)
         rec_out  = self.vgg(rec_C)
         
-        losses = None
+        losses = 0
         
         feature_list = ['relu%s' % n for n in range(1, self.top_n_layer+1)]
         for feature in feature_list:
@@ -277,7 +277,8 @@ class TOPLoss(nn.Module):
             _, c_n, h, w = real_feature.shape
             
             loss = self.loss(real_feature, rec_feature)
-            losses += loss / (c_n*h*w)
+            #print("loss item :", loss/(c_n*h*w))
+            losses += loss/(c_n*h*w)
                     
         return losses
         

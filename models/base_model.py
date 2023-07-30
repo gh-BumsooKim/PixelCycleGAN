@@ -9,6 +9,7 @@ class BaseModel(ABC):
     def __init__(self, opt):
         self.model_names = []
         self.optimizers = []
+        self.opt = opt
     
     @abstractmethod
     def set_input(self, input: dict):
@@ -34,13 +35,13 @@ class BaseModel(ABC):
             self.forward()
             
     def save_networks(self, epoch):
-        if not os.path.isdir(self.save_dir): os.mkdir(self.save_dir)
+        if not os.path.isdir(self.opt.save_dir): os.mkdir(self.opt.save_dir)
         
         for name in self.model_names:
             if isinstance(name, str):
                 save_filename = '%6d_net_%s.pth' % (epoch, name)
-                save_path = os.path.join(self.save_dir, save_filename)
-                net = getattr(self, 'net' + name)
+                save_path = os.path.join(self.opt.save_dir, save_filename)
+                net = getattr(self, name)
 
                 #if len(self.gpu_ids) > 0 and torch.cuda.is_available():
                 #    torch.save(net.module.cpu().state_dict(), save_path)
@@ -48,21 +49,22 @@ class BaseModel(ABC):
                 #else:
                 #    torch.save(net.cpu().state_dict(), save_path)
                 
-                torch.save(net.cpu().state_dict(), save_path)
+                torch.save(net.state_dict(), save_path)
     
     def save_output(self, iters):
-        if not os.path.isdir(self.save_output): os.mkdir(self.save_output)
+        if not os.path.isdir(os.path.join(os.getcwd(), self.opt.save_output)):
+            os.mkdir(os.path.join(os.getcwd(), self.opt.save_output))
         
         rP = torchvision.utils.make_grid(self.real_P)
         rC = torchvision.utils.make_grid(self.real_C)
         fp = torchvision.utils.make_grid(self.fake_p)
-        rp = torchvision.utils.make_grid(self.rec_p)
         fc = torchvision.utils.make_grid(self.fake_c)
+        rp = torchvision.utils.make_grid(self.rec_p)
         rc = torchvision.utils.make_grid(self.rec_c)
         
-        to_save = torch.concat([rP, rC, fp, rp, fc, rc], dim=1)
+        to_save = torch.concat([rP, rC, fc, fp, rp, rc], dim=1)
         save_filename = '%6d.png' % (iters)
-        save_path = os.path.join(self.save_output, save_filename)
+        save_path = os.path.join(self.opt.save_output, save_filename)
         torchvision.utils.save_image(to_save, save_path)
         
         return None

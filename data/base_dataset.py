@@ -22,6 +22,6 @@ def get_transform(opt):
     transform_list = [transforms.ToTensor()]
     
     transform_list.append(transforms.Resize([opt.load_size, opt.load_size]))
-    transform_list += [transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
+    #transform_list += [transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
     
     return transforms.Compose(transform_list)

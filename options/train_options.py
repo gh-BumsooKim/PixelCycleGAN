@@ -30,7 +30,6 @@ class TrainOptions(BaseOptions):
         parser.add_argument('--mu',         type=float, default=0.1,    help='To be experimented')
         parser.add_argument('--top_n_layer',type=int,   default=4,      help='To be experimented')
         
-        
         # Generator
         parser.add_argument('--gan_mode', type=str, default='lsgan')
         parser.add_argument('--n_down', type=int, default=4, help='param without init layer')

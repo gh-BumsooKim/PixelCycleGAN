@@ -9,12 +9,12 @@ class BaseOptions():
         
         # Base
         parser.add_argument('--name',       type=str, default='test', help='param')
-        parser.add_argument('--load_size',  type=int, default=256, help='param')
+        parser.add_argument('--load_size',  type=int, default=512, help='param, default: 256')
         
         # Dataset
         parser.add_argument('--path_pixel_dataset',     type=str, default='utils/pixel art image/*.*', help='')
         parser.add_argument('--path_cartoon_dataset',   type=str, default='utils/cartoon_all/*.*', help='')
-        parser.add_argument('--batch_size',             type=int, default=1, help='')
+        parser.add_argument('--batch_size',             type=int, default=8, help='')
         parser.add_argument('--batch_shuffle',          type=bool,default=True, help='')
         parser.add_argument('--num_workers',            type=int, default=4, help='')
         
