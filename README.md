@@ -1,5 +1,7 @@
 # PixelCycleGAN - Unofficial Pytorch Implementation
 
+***(Currently, our unofficial implementation can not generate pixelization results similar to the quality of the official results in this paper. We think this is due to non-specified hyper-parameter value, non-open dataset, etc. We are currently deriving optimal parameters through not our internet crawling dataset but other refined open pixel-art dataset. We will soon release the experimental results with pre-trained weight files by our code.)***
+
 >![](./assets/origin_paper_results.png)
 >
 > Image source: *["A Pixel image generation algorithm based on CycleGAN"](https://ieeexplore.ieee.org/document/9482118)* (figure 5, page. 4)
@@ -8,6 +10,8 @@
 ![issueBadge](https://img.shields.io/github/issues/gh-BumsooKim/PixelCycleGAN)   ![starBadge](https://img.shields.io/github/stars/gh-BumsooKim/PixelCycleGAN) ![watchBadge](https://img.shields.io/github/watchers/gh-BumsooKim/PixelCycleGAN)  ![repoSize](https://img.shields.io/github/repo-size/gh-BumsooKim/PixelCycleGAN)  ![lastCommit](https://img.shields.io/github/last-commit/gh-BumsooKim/PixelCycleGAN) 
 
 This repository is an unofficial Pytorch implementation of ["A Pixel image generation algorithm based on CycleGAN"](https://ieeexplore.ieee.org/document/9482118) ([https://doi.org/10.1109/IMCEC51613.2021.9482118)](https://doi.org/10.1109/IMCEC51613.2021.9482118)).
+
+
 
 ## PixelCycleGAN Overview
 
